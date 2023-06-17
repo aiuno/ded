@@ -48,7 +48,7 @@ typedef struct {
 } Editor;
 
 Errno editor_save_as(Editor *editor, const char *file_path);
-Errno editor_save(const Editor *editor);
+Errno editor_save(Editor *editor);
 Errno editor_load_from_file(Editor *editor, const char *file_path);
 
 void editor_backspace(Editor *editor);

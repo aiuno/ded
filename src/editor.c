@@ -19,6 +19,7 @@ void editor_backspace(Editor *e) {
 
     memmove(&e->data.items[e->cursor - 1], &e->data.items[e->cursor],
             e->data.count - e->cursor);
+
     e->cursor -= 1;
     e->data.count -= 1;
     editor_retokenize(e);
@@ -37,12 +38,15 @@ void editor_delete(Editor *e) {
   editor_retokenize(e);
 }
 
-// TODO: make sure that you always have new line at the end of the file while
-// saving
-// https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap03.html#tag_03_206
-
 Errno editor_save_as(Editor *e, const char *file_path) {
   printf("Saving as %s...\n", file_path);
+
+  if (e->data.count > 0 && e->data.items[e->data.count - 1] != '\n') {
+    e->data.items[e->data.count] = '\n';
+    e->data.items[e->data.count + 1] = '\0';
+    e->data.count += 1;
+  }
+
   Errno err = write_entire_file(file_path, e->data.items, e->data.count);
   if (err != 0)
     return err;
@@ -52,9 +56,16 @@ Errno editor_save_as(Editor *e, const char *file_path) {
   return 0;
 }
 
-Errno editor_save(const Editor *e) {
+Errno editor_save(Editor *e) {
   assert(e->file_path.count > 0);
   printf("Saving as %s...\n", e->file_path.items);
+
+  if (e->data.count > 0 && e->data.items[e->data.count - 1] != '\n') {
+    e->data.items[e->data.count] = '\n';
+    e->data.items[e->data.count + 1] = '\0';
+    e->data.count += 1;
+  }
+
   return write_entire_file(e->file_path.items, e->data.items, e->data.count);
 }
 
