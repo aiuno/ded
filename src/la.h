@@ -2,7 +2,7 @@
 #define LA_H_
 
 typedef struct {
-    float x, y;
+  float x, y;
 } Vec2f;
 
 Vec2f vec2f(float x, float y);
@@ -14,7 +14,7 @@ Vec2f vec2f_mul3(Vec2f a, Vec2f b, Vec2f c);
 Vec2f vec2f_div(Vec2f a, Vec2f b);
 
 typedef struct {
-    int x, y;
+  int x, y;
 } Vec2i;
 
 Vec2i vec2i(int x, int y);
@@ -26,7 +26,7 @@ Vec2i vec2i_mul3(Vec2i a, Vec2i b, Vec2i c);
 Vec2i vec2i_div(Vec2i a, Vec2i b);
 
 typedef struct {
-    float x, y, z, w;
+  float x, y, z, w;
 } Vec4f;
 
 Vec4f vec4f(float x, float y, float z, float w);

@@ -1,6 +1,7 @@
 te
 ded
 SDL2
+cmake-build-debug
 *.exe
 *.obj
 *.pdb
