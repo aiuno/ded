@@ -7,11 +7,10 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 
-
 #if defined(__APPLE__)
 #define KMOD_LMETA 0x0400
 #define KMOD_RMETA 0x0800
-#define KMOD_META (KMOD_LMETA|KMOD_RMETA)
+#define KMOD_META (KMOD_LMETA | KMOD_RMETA)
 #endif
 
 #include <ft2build.h>
@@ -163,12 +162,10 @@ int main(int argc, char **argv) {
   editor.atlas = &atlas;
   editor_retokenize(&editor);
 
-    // (Aiuno): We now have Mac friendly bindings. (For the most part)
-    //          F(1-12) keys are kinda annoying on Mac
 #if defined(__APPLE__)
-    int DED_MOD_CTRL = KMOD_META; // Also known as command
+  int DED_MOD_CTRL = KMOD_META; // Also known as command
 #else
-    int DED_MOD_CTRL = KMOD_CTRL;
+  int DED_MOD_CTRL = KMOD_CTRL;
 #endif
 
   bool quit = false;
@@ -272,9 +269,9 @@ int main(int argc, char **argv) {
           } break;
 
           case SDLK_s: {
-              if (!(event.key.keysym.mod & DED_MOD_CTRL))
-                  break;
-              // else: Continue to save
+            if (!(event.key.keysym.mod & DED_MOD_CTRL))
+              break;
+            // else: Continue to save
           }
           case SDLK_F2: {
             if (editor.file_path.count > 0) {
@@ -288,10 +285,11 @@ int main(int argc, char **argv) {
               flash_error("Nowhere to save the text");
             }
           } break;
+
           case SDLK_o: {
-              if (!(event.key.keysym.mod & DED_MOD_CTRL))
-                  break;
-              // else: Continue to file browser
+            if (!(event.key.keysym.mod & DED_MOD_CTRL))
+              break;
+            // else: Continue to file browser
           }
           case SDLK_F3: {
             file_browser = true;
